@@ -44,10 +44,10 @@
     <mvc:resources mapping="/resources/**" location="/resources/" />
     
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
-		p:username="root" 
-		p:password="root" 
-		p:url="jdbc:mysql://localhost/sushi"
-		p:driverClassName="com.mysql.jdbc.Driver" 
+          p:username="root" 
+          p:password="root" 
+          p:url="jdbc:mysql://localhost/sushi"
+          p:driverClassName="com.mysql.jdbc.Driver" 
     />
 
     <!--
@@ -56,5 +56,12 @@
     <bean name="indexController"
           class="org.springframework.web.servlet.mvc.ParameterizableViewController"
           p:viewName="index" />
+    
+    <!--
+    The MultiPartResolver
+    -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="2000000"/>
+    </bean>
 
 </beans>
