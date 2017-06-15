@@ -74,6 +74,12 @@ public class ProdutoController {
         return "produto/exibe_produto";
     }
 
+    @RequestMapping("/detalhe")
+    public String detalha(Long id, Model model) {
+        model.addAttribute("produto", dao.buscarProdutoPorId(id));
+        return "produto/show_produto";
+    }
+
     @RequestMapping("/alteraProduto")
     public String altera(MultipartFile imagem, @Valid Produto produto, BindingResult result) {
         if (result.hasErrors()) {

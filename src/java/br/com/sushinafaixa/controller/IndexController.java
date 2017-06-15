@@ -7,7 +7,6 @@ package br.com.sushinafaixa.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.portlet.ModelAndView;
 
 /**
  *
@@ -15,17 +14,15 @@ import org.springframework.web.portlet.ModelAndView;
  */
 @Controller
 public class IndexController {
-    
+
     @RequestMapping("/")
     public String index() {
         return "index";
     }
-    
-    @RequestMapping("/welcome")
-    public ModelAndView wellcome() {
-        String viewName = "welcome";
-        String var = "message";
-        String content = "WELCOME TO SPRING WORLD!!!";
-        return new ModelAndView(viewName,var,content);
+
+    @RequestMapping("/403")
+    public String accessDenied() {
+        return "/403";
     }
+
 }

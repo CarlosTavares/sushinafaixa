@@ -14,7 +14,7 @@
         <title>Listagem de Mensagens</title>
     </head>
     <body>
-        <a href="<c:url value='/index'/>">Voltar</a> <br><br>
+        <a href="<c:url value='menuAdm'/>">Voltar ao Menu</a> <br><br>
         <table>
             <tr>
                 <th>Id</th>

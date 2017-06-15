@@ -36,6 +36,7 @@
                     </li>
                     <li><a href="#">Empresa</a></li>
                     <li><a href="#">Contato</a></li>
+                    <li><a href="logout">Sair do sistema</a></li>
                 </ul>
                 <form class="navbar-form navbar-right" role="search">
                     <div class="form-group"><input class="form-control" type="text" placeholder="Pesquisar" /></div>
@@ -67,3 +68,4 @@
     <script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
 </body>
 </html>
+

@@ -10,11 +10,12 @@ package br.com.sushinafaixa.bean;
  * @author Carlos.Tavares
  */
 public class Cliente {
-    
+
     private Long id;
     private String nome;
     private String cpf;
     private String endereco;
+    private Usuario usuario;
 
     public Cliente() {
     }
@@ -50,4 +51,13 @@ public class Cliente {
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
 }

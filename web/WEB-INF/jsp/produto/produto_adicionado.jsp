@@ -17,6 +17,6 @@
     <body>
         Produto adicionado com sucesso!
         <br />
-	<a href="<c:url value='/listaProduto'/>" title="Adicionar outro produto">Adicionar Produto</a>
+	<a href="<c:url value='formAdicionaProduto'/>" title="Adicionar outro produto">Adicionar Produto</a>
     </body>
 </html>

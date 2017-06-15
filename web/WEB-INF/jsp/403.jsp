@@ -1,6 +1,6 @@
 <%-- 
-    Document   : welcome.jsp
-    Created on : 21/05/2017, 22:59:51
+    Document   : 403
+    Created on : 15/06/2017, 07:44:43
     Author     : Carlos.Tavares
 --%>
 
@@ -9,9 +9,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Acesso Negado</title>
     </head>
     <body>
-        <h1>${message}</h1>
+        <h3>Acesso Negado!</h3>
+        <h3 style="color:red;">Voce não tem autorização paa acessar esta página!</h3>
     </body>
 </html>

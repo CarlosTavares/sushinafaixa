@@ -72,8 +72,7 @@ public class AdministradorDAO {
 
     public Administrador buscarAdministradorPorId(Long id) {
         String sql = "select * from administrador where idadministrador = ? ";
-        try (
-                PreparedStatement stmt = connection.prepareStatement(sql)) {
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setLong(1, id);
             ResultSet rs = stmt.executeQuery();
             Administrador administrador = new Administrador();
@@ -103,7 +102,7 @@ public class AdministradorDAO {
     public boolean alterarAdministrador(Administrador administrador) {
         String sql = "update administrador set nome = ?, login = ? where idadministrador = ?";
         try (
-            PreparedStatement stmt = connection.prepareStatement(sql)) {
+                PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, administrador.getNome());
             stmt.setString(2, administrador.getLogin());
             stmt.setLong(3, administrador.getId());

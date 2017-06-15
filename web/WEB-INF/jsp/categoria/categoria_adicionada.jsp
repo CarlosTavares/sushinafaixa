@@ -14,6 +14,6 @@
     <body>
         Categoria adicionada com sucesso!
         <br />
-	<a href="/formAdicionaCategoria" title="Adicionar outra categoria">Adicionar Categoria</a>
+	<a href="formAdicionaCategoria" title="Adicionar outra categoria">Adicionar outra Categoria</a>
     </body>
 </html>

@@ -22,16 +22,10 @@
     <mvc:annotation-driven />
     <context:component-scan base-package="br.com.sushinafaixa.*" />
 
-    <!--
-    Most controllers will use the ControllerClassNameHandlerMapping above, but
-    for the index controller we are using ParameterizableViewController, so we must
-    define an explicit mapping for it.
-    -->
-
     <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
         <property name="mappings">
             <props>
-                <prop key="index">indexController</prop>
+                <prop key="/">indexController</prop>
             </props>
         </property>
     </bean>
@@ -40,7 +34,7 @@
           class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:prefix="/WEB-INF/jsp/"
           p:suffix=".jsp" />
-    
+
     <mvc:resources mapping="/resources/**" location="/resources/" />
     
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
@@ -49,19 +43,17 @@
           p:url="jdbc:mysql://localhost/sushi"
           p:driverClassName="com.mysql.jdbc.Driver" 
     />
-
-    <!--
-    The index controller.
-    -->
-    <bean name="indexController"
-          class="org.springframework.web.servlet.mvc.ParameterizableViewController"
-          p:viewName="index" />
-    
     <!--
     The MultiPartResolver
     -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="2000000"/>
     </bean>
+    <!--
+    Filtro de autorização e autenticação
+    -->
+    <mvc:interceptors>
+        <bean class="br.com.sushinafaixa.interceptors.AuthInterceptor" />
+    </mvc:interceptors>
 
 </beans>

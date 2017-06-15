@@ -14,6 +14,6 @@
     <body>
         Mensagem adicionada com sucesso!
         <br />
-	<a href="/formAdicionaMensagem" title="Adicionar outra mensagem">Adicionar Mensagem</a>
+	<a href="formAdicionaMensagem" title="Adicionar outra mensagem">Adicionar outra Mensagem</a>
     </body>
 </html>
