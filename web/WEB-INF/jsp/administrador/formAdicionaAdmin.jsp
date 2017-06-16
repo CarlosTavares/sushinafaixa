@@ -10,7 +10,8 @@
         <h3>Adicionar Administrador</h3>
         <form action="<c:url value='/adicionaAdministrador' />" method="post">
             Nome: <input type="text" name="nome" /> <br /><br />
-            Login: <input type="text" name="login" /> <br /><br />
+            Login: <input type="text" name="usuario.login" /> <br /><br />
+            Senha: <input type="password" name="usuario.senha" /> <br /><br />
             <input type="submit" value="Adicionar">
         </form>
     </body>

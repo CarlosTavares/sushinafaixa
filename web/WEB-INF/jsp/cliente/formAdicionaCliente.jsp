@@ -10,6 +10,8 @@
         <h3>Adicionar Cliente</h3>
         <form action="<c:url value='/adicionaCliente' />" method="post">
             Nome: <input type="text" name="nome" /> <br /><br />
+            Login: <input type="text" name="usuario.login" /> <br /><br />
+            Senha: <input type="password" name="usuario.senha" /> <br /><br />
             CPF: <input type="text" name="cpf" /> <br /><br />
             Endereço: <input type="text" name="endereco" /> <br /><br />
             <input type="submit" value="Adicionar">

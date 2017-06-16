@@ -3,8 +3,10 @@
     Created on : 22/05/2017, 00:36:17
     Author     : Carlos.Tavares
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,6 +16,6 @@
     <body>
         Administrador adicionado com sucesso!
         <br />
-	<a href="/formAdicionaAdmin" title="Adicionar outro administrador">Adicionar Administrador</a>
+	<a href="<c:url value='formAdicionaAdmin'/>" title="Adicionar outro administrador">Adicionar outro Administrador</a>
     </body>
 </html>

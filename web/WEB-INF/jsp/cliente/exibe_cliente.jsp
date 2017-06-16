@@ -21,15 +21,17 @@
             <form:errors path="cliente.nome" cssStyle="color:red"/>
             <input name="nome" value="${cliente.nome}" />
             <br><br>
-            Login:
+            Login: ${cliente.usuario.login}
+            <br><br>
+            CPF:
             <input name="cpf" value="${cliente.cpf}" />
             <br><br>
-            Senha:
+            Endereço:
             <input name="endereco" value="${cliente.endereco}" />
             <br><br>
             <input type="submit" value="Alterar"/>
             <br><br>            
         </form>
-        <a href="<c:url value='/'/>">Voltar</a>
+        <a href="<c:url value='/listaCliente'/>">Voltar</a>
     </body>
 </html>

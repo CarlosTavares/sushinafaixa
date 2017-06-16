@@ -14,11 +14,12 @@
         <title>Listagem de Clientes</title>
     </head>
     <body>
-        <a href="<c:url value='/index'/>">Voltar</a> <br><br>
+        <a href="<c:url value='menuAdm'/>">Voltar ao Menu</a> <br><br>
         <table>
             <tr>
                 <th>Id</th>
                 <th>Nome</th>
+                <th>Login</th>
                 <th>CPF</th>
                 <th>Endereço</th>
                 <th>Ação</th>
@@ -27,6 +28,7 @@
                 <tr>
                     <td>${clt.id}</td>
                     <td>${clt.nome}</td>
+                    <td>${clt.usuario.login}</td>
                     <td>${clt.cpf}</td>
                     <td>${clt.endereco}</td>
                     <td>

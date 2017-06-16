@@ -21,8 +21,7 @@
             <form:errors path="adm.nome" cssStyle="color:red"/>
             <input name="nome" value="${adm.nome}" />
             <br><br>
-            Login:
-            <input name="login" value="${adm.login}" />
+            Login: ${adm.usuario.login}
             <br><br>
             <input type="submit" value="Alterar"/>
             <br><br>            

@@ -6,6 +6,8 @@
 package br.com.sushinafaixa.dao;
 
 import br.com.sushinafaixa.bean.Administrador;
+import br.com.sushinafaixa.bean.Role;
+import br.com.sushinafaixa.bean.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,6 +28,9 @@ public class AdministradorDAO {
     private final Connection connection;
 
     @Autowired
+    private UsuarioDAO usuarioDAO;
+
+    @Autowired
     public AdministradorDAO(DataSource dataSource) {
         try {
             this.connection = dataSource.getConnection();
@@ -35,21 +40,28 @@ public class AdministradorDAO {
     }
 
     public boolean adiciona(Administrador adm) {
-        String sql = "insert into administrador (nome, login) values (?,?)";
+        boolean resultado = false;
+        String sql = "insert into administrador (nome,usuario_idusuario) values (?,?)";
         try {
+            adm.setUsuario(usuarioDAO.adicionaUsuario(adm.getUsuario(), Role.ADMIN));
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, adm.getNome());
-            stmt.setString(2, adm.getLogin());
+            stmt.setLong(2, adm.getUsuario().getId());
             stmt.execute();
+            resultado = true;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return true;
+        return resultado;
     }
 
     public List<Administrador> lista() {
-        List<Administrador> admins = new ArrayList<Administrador>();
-        String sql = "select * from administrador order by nome";
+        List<Administrador> admins = new ArrayList<>();
+        String sql = "select a.idadministrador,a.nome,a.usuario_idusuario"
+                + " ,u.login"
+                + " from administrador a"
+                + " inner join usuario u on a.usuario_idusuario=u.idusuario"
+                + " order by a.nome";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
@@ -58,10 +70,12 @@ public class AdministradorDAO {
                 Administrador adm = new Administrador();
                 adm.setId(rs.getLong("idadministrador"));
                 adm.setNome(rs.getString("nome"));
-                adm.setLogin(rs.getString("login"));
+                Usuario usuario = new Usuario();
+                usuario.setId(rs.getLong("usuario_idusuario"));
+                usuario.setLogin(rs.getString("login"));
+                adm.setUsuario(usuario);
                 admins.add(adm);
             }
-
             rs.close();
             stmt.close();
         } catch (SQLException e) {
@@ -71,15 +85,48 @@ public class AdministradorDAO {
     }
 
     public Administrador buscarAdministradorPorId(Long id) {
-        String sql = "select * from administrador where idadministrador = ? ";
+        String sql = "select a.idadministrador,a.nome,a.usuario_idusuario"
+                + " ,u.login"
+                + " from administrador a"
+                + " inner join usuario u on a.usuario_idusuario=u.idusuario"
+                + " where a.idadministrador = ?";
+        Administrador administrador = null;
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setLong(1, id);
             ResultSet rs = stmt.executeQuery();
-            Administrador administrador = new Administrador();
             if (rs.next()) {
+                administrador = new Administrador();
                 administrador.setId(rs.getLong("idadministrador"));
                 administrador.setNome(rs.getString("nome"));
-                administrador.setLogin(rs.getString("login"));
+                Usuario usuario = new Usuario();
+                usuario.setId(rs.getLong("usuario_idusuario"));
+                usuario.setLogin(rs.getString("login"));
+                administrador.setUsuario(usuario);
+            }
+            return administrador;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Administrador buscarAdministradorByUsuario(Long idUsuario) {
+        String sql = "select a.idadministrador,a.nome,a.usuario_idusuario"
+                + " ,u.login"
+                + " from administrador a"
+                + " inner join usuario u on a.usuario_idusuario=u.idusuario"
+                + " where a.usuario_idusuario = ?";
+        Administrador administrador = null;
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setLong(1, idUsuario);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                administrador = new Administrador();
+                administrador.setId(rs.getLong("idadministrador"));
+                administrador.setNome(rs.getString("nome"));
+                Usuario usuario = new Usuario();
+                usuario.setId(rs.getLong("usuario_idusuario"));
+                usuario.setLogin(rs.getString("login"));
+                administrador.setUsuario(usuario);
             }
             return administrador;
         } catch (SQLException e) {
@@ -89,8 +136,7 @@ public class AdministradorDAO {
 
     public boolean removerAdministrador(Long id) {
         String sql = "delete from administrador where idadministrador = ? ";
-        try (
-                PreparedStatement stmt = connection.prepareStatement(sql)) {
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setLong(1, id);
             stmt.execute();
         } catch (SQLException e) {
@@ -100,11 +146,9 @@ public class AdministradorDAO {
     }
 
     public boolean alterarAdministrador(Administrador administrador) {
-        String sql = "update administrador set nome = ?, login = ? where idadministrador = ?";
-        try (
-                PreparedStatement stmt = connection.prepareStatement(sql)) {
+        String sql = "update administrador set nome = ? where idadministrador = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, administrador.getNome());
-            stmt.setString(2, administrador.getLogin());
             stmt.setLong(3, administrador.getId());
             stmt.execute();
         } catch (SQLException e) {
@@ -112,5 +156,4 @@ public class AdministradorDAO {
         }
         return true;
     }
-
 }

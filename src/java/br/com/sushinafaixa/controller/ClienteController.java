@@ -36,7 +36,7 @@ public class ClienteController {
     @RequestMapping("/adicionaCliente")
     public String adiciona(Cliente clt) {
         dao.adiciona(clt);
-        return "cliente/cliente_adicionado";
+        return "cliente/clente_adicionado";
     }
 
     @RequestMapping("/listaCliente")

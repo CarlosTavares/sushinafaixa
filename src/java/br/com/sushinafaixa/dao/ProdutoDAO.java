@@ -24,7 +24,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class ProdutoDAO {
-    
+
     private final Connection connection;
 
     @Autowired
@@ -53,10 +53,10 @@ public class ProdutoDAO {
     }
 
     public List<Produto> lista() {
-        List<Produto> produtos = new ArrayList<Produto>();
+        List<Produto> produtos = new ArrayList<>();
         String sql = "select idproduto,prd.descricao as descricao,preco,imagem"
                 + ",categoria_idcategoria,cat.descricao as catdescricao"
-                + ",administrador_idadministrador,nome,login"
+                + ",administrador_idadministrador,nome"
                 + " from produto prd "
                 + " left join categoria cat on prd.categoria_idcategoria=cat.idcategoria "
                 + " left join administrador adm on prd.administrador_idadministrador=adm.idadministrador "
@@ -79,10 +79,8 @@ public class ProdutoDAO {
                 prod.setAdministrador(adm);
                 prod.getAdministrador().setId(rs.getLong("administrador_idadministrador"));
                 prod.getAdministrador().setNome(rs.getString("nome"));
-                prod.getAdministrador().setLogin(rs.getString("login"));
                 produtos.add(prod);
             }
-
             rs.close();
             stmt.close();
         } catch (SQLException e) {
@@ -94,18 +92,18 @@ public class ProdutoDAO {
     public Produto buscarProdutoPorId(Long id) {
         String sql = "select idproduto,prd.descricao as descricao,preco,imagem"
                 + ",categoria_idcategoria,cat.descricao as catdescricao"
-                + ",administrador_idadministrador,nome,login"
+                + ",administrador_idadministrador,nome"
                 + " from produto prd "
                 + " left join categoria cat on prd.categoria_idcategoria=cat.idcategoria "
                 + " left join administrador adm on prd.administrador_idadministrador=adm.idadministrador "
                 + " where idproduto = ? "
                 + " order by descricao";
-        try (
-            PreparedStatement stmt = connection.prepareStatement(sql)) {
+        Produto prod = null;
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setLong(1, id);
             ResultSet rs = stmt.executeQuery();
-            Produto prod = new Produto();
             if (rs.next()) {
+                prod = new Produto();
                 prod.setId(rs.getLong("idProduto"));
                 prod.setDescricao(rs.getString("descricao"));
                 prod.setPreco(rs.getDouble("preco"));
@@ -118,7 +116,6 @@ public class ProdutoDAO {
                 prod.setAdministrador(adm);
                 prod.getAdministrador().setId(rs.getLong("administrador_idadministrador"));
                 prod.getAdministrador().setNome(rs.getString("nome"));
-                prod.getAdministrador().setLogin(rs.getString("login"));
             }
             return prod;
         } catch (SQLException e) {
@@ -128,8 +125,7 @@ public class ProdutoDAO {
 
     public boolean removerProduto(Long id) {
         String sql = "delete from produto where idproduto = ? ";
-        try (
-            PreparedStatement stmt = connection.prepareStatement(sql)) {
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setLong(1, id);
             stmt.execute();
         } catch (SQLException e) {
@@ -141,8 +137,7 @@ public class ProdutoDAO {
     public boolean alterarProduto(Produto produto) {
         String sql = "update produto set descricao = ?, preco = ?, imagem = ?"
                 + ", categoria_idcategoria = ?, administrador_idadministrador = ? where idproduto = ?";
-        try (
-            PreparedStatement stmt = connection.prepareStatement(sql)) {
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, produto.getDescricao());
             stmt.setDouble(2, produto.getPreco());
             stmt.setString(3, produto.getImagemPath());

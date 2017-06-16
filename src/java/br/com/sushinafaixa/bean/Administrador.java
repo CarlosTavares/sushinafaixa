@@ -10,10 +10,10 @@ package br.com.sushinafaixa.bean;
  * @author Carlos.Tavares
  */
 public class Administrador {
-    
+
     private Long id;
     private String nome;
-    private String login;
+    private Usuario usuario;
 
     public Administrador() {
     }
@@ -34,11 +34,11 @@ public class Administrador {
         this.nome = nome;
     }
 
-    public String getLogin() {
-        return login;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }
