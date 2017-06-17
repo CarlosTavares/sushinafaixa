@@ -5,6 +5,7 @@
  */
 package br.com.sushinafaixa.bean;
 
+import br.com.sushinafaixa.model.Role;
 import java.io.Serializable;
 
 /**

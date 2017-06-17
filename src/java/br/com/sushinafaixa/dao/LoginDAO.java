@@ -6,6 +6,7 @@
 package br.com.sushinafaixa.dao;
 
 import br.com.sushinafaixa.bean.Usuario;
+import br.com.sushinafaixa.model.Role;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -50,7 +51,7 @@ public class LoginDAO {
     }
 
     public Usuario buscaUsuarioByLogin(String login) {
-        String sql = "select u.idusuario,u.login,u.senha "//
+        String sql = "select u.idusuario,u.login,u.senha,u.role "//
                 + " from usuario u where u.login = ? ";
         Usuario user = null;
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
@@ -61,6 +62,7 @@ public class LoginDAO {
                 user.setId(rs.getLong("idusuario"));
                 user.setLogin(rs.getString("login"));
                 user.setSenha(rs.getString("senha"));
+                user.setRole(Enum.valueOf(Role.class, rs.getString("role")));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

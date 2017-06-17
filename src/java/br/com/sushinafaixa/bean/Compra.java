@@ -5,7 +5,9 @@
  */
 package br.com.sushinafaixa.bean;
 
+import br.com.sushinafaixa.model.Status;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  *
@@ -20,6 +22,7 @@ public class Compra {
     private Double precoTotal;
     private String endereco;
     private String pagamento;
+    private List<ItemCompra> itens;
 
     public Compra() {
     }
@@ -79,4 +82,17 @@ public class Compra {
     public void setPagamento(String pagamento) {
         this.pagamento = pagamento;
     }
+
+    public List<ItemCompra> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<ItemCompra> itens) {
+        this.itens = itens;
+    }
+    
+    public boolean isEntregue() {
+        return this.getStatus().equals(Status.ENTREGUE);
+    }
+
 }

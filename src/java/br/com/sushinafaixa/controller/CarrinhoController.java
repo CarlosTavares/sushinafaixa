@@ -5,7 +5,7 @@
  */
 package br.com.sushinafaixa.controller;
 
-import br.com.sushinafaixa.bean.Carrinho;
+import br.com.sushinafaixa.model.Carrinho;
 import br.com.sushinafaixa.bean.Cliente;
 import br.com.sushinafaixa.bean.Produto;
 import br.com.sushinafaixa.bean.Usuario;
@@ -89,7 +89,6 @@ public class CarrinhoController {
     public String finalizaCompraSave(HttpServletRequest request, @Valid Carrinho carrinhoForm, BindingResult result) {
         Carrinho carrinho = Utils.getCarrinhoSession(request);
         Usuario usuario = Utils.getUsuarioLogado(request);
-        System.out.println(usuario.getId()+" - "+usuario.getLogin());
         Cliente cliente = clienteDAO.buscarClienteByUsuario(usuario.getId());
         if (result.hasErrors()) {
             return "compra/finaliza_compra";

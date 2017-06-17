@@ -6,7 +6,7 @@
 package br.com.sushinafaixa.dao;
 
 import br.com.sushinafaixa.bean.Cliente;
-import br.com.sushinafaixa.bean.Role;
+import br.com.sushinafaixa.model.Role;
 import br.com.sushinafaixa.bean.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

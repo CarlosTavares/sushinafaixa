@@ -7,6 +7,7 @@ package br.com.sushinafaixa.controller;
 
 import br.com.sushinafaixa.bean.Usuario;
 import br.com.sushinafaixa.dao.LoginDAO;
+import br.com.sushinafaixa.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,10 +39,14 @@ public class LoginController {
     public String efetuaLogin(Usuario usuario, Model model,
             HttpServletRequest request) {
         Usuario usuarioLogado = dao.buscaUsuarioByLogin(usuario.getLogin());
-        if (usuarioLogado!=null) {
+        if (usuarioLogado != null) {
             request.getSession(true)
                     .setAttribute("usuario", usuarioLogado);
-            return "redirect:menuAdm";
+            if (usuarioLogado.getRole().equals(Role.ADMIN)) {
+                return "redirect:menuAdm";
+            } else {
+                return "redirect:menuCliente";
+            }
         } else {
             model.addAttribute("msgLoginInvalido", "Não é um usuario válido.");
             return "redirect:loginForm";
@@ -53,10 +58,20 @@ public class LoginController {
         return "auth/menuAdm";
     }
 
+    @RequestMapping(value = "menuCliente")
+    public String menuCliente() {
+        return "auth/menuCliente";
+    }
+
+    @RequestMapping(value = "menuGeral")
+    public String menuGeral() {
+        return "menuGeral";
+    }
+
     @RequestMapping("logout")
     public String logout(HttpSession session) {
         System.out.println("logout");
         session.invalidate();
-        return "redirect:loginForm";
+        return "redirect:menuGeral";
     }
 }

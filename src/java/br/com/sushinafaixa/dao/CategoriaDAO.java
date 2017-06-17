@@ -70,8 +70,7 @@ public class CategoriaDAO {
 
     public Categoria buscarCategoriaPorId(Long id) {
         String sql = "select * from categoria where idcategoria = ? ";
-        try (
-            PreparedStatement stmt = connection.prepareStatement(sql)) {
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setLong(1, id);
             ResultSet rs = stmt.executeQuery();
             Categoria categoria = new Categoria();
@@ -88,8 +87,7 @@ public class CategoriaDAO {
 
     public boolean removerCategoria(Long id) {
         String sql = "delete from categoria where idcategoria = ? ";
-        try (
-            PreparedStatement stmt = connection.prepareStatement(sql)) {
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setLong(1, id);
             stmt.execute();
         } catch (SQLException e) {
@@ -100,8 +98,7 @@ public class CategoriaDAO {
 
     public boolean alterarCategoria(Categoria categoria) {
         String sql = "update categoria set descricao = ? where idcategoria = ?";
-        try (
-            PreparedStatement stmt = connection.prepareStatement(sql)) {
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, categoria.getDescricao());
             stmt.setLong(2, categoria.getId());
             stmt.execute();

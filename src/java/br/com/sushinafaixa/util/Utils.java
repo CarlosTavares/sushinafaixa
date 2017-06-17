@@ -5,7 +5,7 @@
  */
 package br.com.sushinafaixa.util;
 
-import br.com.sushinafaixa.bean.Carrinho;
+import br.com.sushinafaixa.model.Carrinho;
 import br.com.sushinafaixa.bean.Usuario;
 import javax.servlet.http.HttpServletRequest;
 

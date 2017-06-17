@@ -5,6 +5,7 @@
  */
 package br.com.sushinafaixa.interceptors;
 
+import br.com.sushinafaixa.util.Utils;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -22,11 +23,13 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
         System.out.println(uri);
         if (uri.endsWith("loginForm")
                 || uri.endsWith("efetuaLogin")
+                || uri.endsWith("menuGeral")
+                || uri.endsWith("/")
                 || uri.contains("resources")) {
             return true;
         }
 
-        if (request.getSession().getAttribute("usuario") != null) {
+        if (Utils.getUsuarioLogado(request) != null) {
             return true;
         }
 

@@ -5,7 +5,7 @@
  */
 package br.com.sushinafaixa.dao;
 
-import br.com.sushinafaixa.bean.Role;
+import br.com.sushinafaixa.model.Role;
 import br.com.sushinafaixa.bean.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -38,7 +38,7 @@ public class UsuarioDAO {
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setString(1, usuario.getLogin());
         stmt.setString(2, usuario.getSenha());
-        stmt.setString(3, role.toString());
+        stmt.setString(3, role.name());
         stmt.execute();
         usuario.setId(this.getMaxUsuario());
         return usuario;

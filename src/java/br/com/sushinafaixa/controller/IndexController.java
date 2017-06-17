@@ -17,7 +17,8 @@ public class IndexController {
 
     @RequestMapping("/")
     public String index() {
-        return "index";
+        System.out.println("IndesController");
+        return "menuGeral";
     }
 
     @RequestMapping("/403")

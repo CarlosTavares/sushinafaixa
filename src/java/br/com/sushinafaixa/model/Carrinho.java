@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.sushinafaixa.bean;
+package br.com.sushinafaixa.model;
 
+import br.com.sushinafaixa.bean.Cliente;
+import br.com.sushinafaixa.bean.Produto;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

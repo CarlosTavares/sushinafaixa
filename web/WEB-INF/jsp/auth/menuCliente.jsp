@@ -1,9 +1,8 @@
 <%-- 
-    Document   : menuAdm
-    Created on : 12/06/2017, 15:36:18
+    Document   : menuCliente
+    Created on : 17/06/2017, 11:14:30
     Author     : Carlos.Tavares
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -30,33 +29,14 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#">Home</a></li>
-                    <li class="dropdown"><a class="dropdown-toggle" href="" data-toggle="dropdown">Categorias <b class="caret"></b></a>
+                    <li class="dropdown"><a class="dropdown-toggle" href="" data-toggle="dropdown">Suas Compras <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="formAdicionaCategoria">Nova Categoria</a></li>
-                            <li class="divider"></li>
-                            <li><a href="listaCategoria">Listar Categorias</a></li>
+                            <li><a href="listaComprasCliente">Listar suas Compras</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown">Produtos<b class="caret"></b></a>
+                    <li class="dropdown"><a class="dropdown-toggle" href="" data-toggle="dropdown">Seus Dados <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="formAdicionaProduto">Novo Produto</a></li>
-                            <li class="divider"></li>
-                            <li><a href="listaProduto">Listar Produtos</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown">Mensagens<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="listaMensagens">Listar Mensagens</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown">Curriculos<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="listaCurriculo">Listar Curriculos</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown"><a class="dropdown-toggle" href="" data-toggle="dropdown">Compras <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="listaCompras">Listar Compras</a></li>
+                            <li><a href="visualizaClienteLogado">Visualizar seus Dados</a></li>
                         </ul>
                     </li>
                     <li><a href="logout">Sair</a></li>
@@ -90,4 +70,3 @@
     <script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
 </body>
 </html>
-

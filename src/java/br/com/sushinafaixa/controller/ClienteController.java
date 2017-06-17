@@ -6,7 +6,10 @@
 package br.com.sushinafaixa.controller;
 
 import br.com.sushinafaixa.bean.Cliente;
+import br.com.sushinafaixa.bean.Usuario;
 import br.com.sushinafaixa.dao.ClienteDAO;
+import br.com.sushinafaixa.util.Utils;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -54,6 +57,14 @@ public class ClienteController {
     @RequestMapping("/exibeCliente")
     public String exibe(Long id, Model model) {
         model.addAttribute("cliente", dao.buscarClientePorId(id));
+        return "cliente/exibe_cliente";
+    }
+
+    @RequestMapping("/visualizaClienteLogado")
+    public String exibe(HttpServletRequest request, Model model) {
+        Usuario usuario = Utils.getUsuarioLogado(request);
+        Cliente cliente = dao.buscarClienteByUsuario(usuario.getId());
+        model.addAttribute("cliente", dao.buscarClientePorId(cliente.getId()));
         return "cliente/exibe_cliente";
     }
 
