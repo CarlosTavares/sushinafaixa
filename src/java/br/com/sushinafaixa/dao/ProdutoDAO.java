@@ -58,11 +58,50 @@ public class ProdutoDAO {
                 + ",categoria_idcategoria,cat.descricao as catdescricao"
                 + ",administrador_idadministrador,nome"
                 + " from produto prd "
-                + " left join categoria cat on prd.categoria_idcategoria=cat.idcategoria "
-                + " left join administrador adm on prd.administrador_idadministrador=adm.idadministrador "
-                + "order by descricao";
+                + " left join categoria cat on prd.categoria_idcategoria=cat.idcategoria"
+                + " left join administrador adm on prd.administrador_idadministrador=adm.idadministrador"
+                + " order by descricao";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Produto prod = new Produto();
+                prod.setId(rs.getLong("idProduto"));
+                prod.setDescricao(rs.getString("descricao"));
+                prod.setPreco(rs.getDouble("preco"));
+                prod.setImagemPath(rs.getString("imagem"));
+                Categoria cat = new Categoria();
+                prod.setCategoria(cat);
+                prod.getCategoria().setId(rs.getLong("categoria_idcategoria"));
+                prod.getCategoria().setDescricao(rs.getString("catdescricao"));
+                Administrador adm = new Administrador();
+                prod.setAdministrador(adm);
+                prod.getAdministrador().setId(rs.getLong("administrador_idadministrador"));
+                prod.getAdministrador().setNome(rs.getString("nome"));
+                produtos.add(prod);
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return produtos;
+    }
+
+    public List<Produto> lista(Long idCategoria) {
+        List<Produto> produtos = new ArrayList<>();
+        String sql = "select idproduto,prd.descricao as descricao,preco,imagem"
+                + ",prd.categoria_idcategoria,cat.descricao as catdescricao"
+                + ",prd.administrador_idadministrador,adm.nome"
+                + " from produto prd"
+                + " left join categoria cat on prd.categoria_idcategoria=cat.idcategoria"
+                + " left join administrador adm on prd.administrador_idadministrador=adm.idadministrador"
+                + " where prd.categoria_idcategoria = ?"
+                + " order by prd.descricao";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(sql);
+            stmt.setLong(1, idCategoria);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {

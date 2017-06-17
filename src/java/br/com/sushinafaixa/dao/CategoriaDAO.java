@@ -47,7 +47,7 @@ public class CategoriaDAO {
     }
 
     public List<Categoria> lista() {
-        List<Categoria> categorias = new ArrayList<Categoria>();
+        List<Categoria> categorias = new ArrayList<>();
         String sql = "select * from categoria order by descricao";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(sql);
@@ -59,7 +59,7 @@ public class CategoriaDAO {
                 cat.setDescricao(rs.getString("descricao"));
                 categorias.add(cat);
             }
-
+            System.out.println("br.com.sushinafaixa.dao.CategoriaDAO.lista()");
             rs.close();
             stmt.close();
         } catch (SQLException e) {

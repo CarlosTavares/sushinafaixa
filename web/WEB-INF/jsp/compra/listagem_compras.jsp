@@ -15,6 +15,7 @@
         <title>Lista de Compras</title>
     </head>
     <body>
+        <input type="button" value="Voltar" onclick="history.back()" /><br><br>
         <h3>Lista de Compras</h3>
         <a href="<c:url value='menuAdm'/>">Voltar ao Menu</a> <br><br>
         <spring:url value="/listaCompras" var="listaComprasUrl" />

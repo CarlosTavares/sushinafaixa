@@ -29,7 +29,7 @@
         </span>
         <br /><br />
         Imagem: <figure><img src="${prod.imagemPath}" width="25px" alt="${prod.descricao}" /></figure><br /><br />
-        <a href="<c:url value='/compra?idProduto=${produto.id}'/>">Adicionar ao Carrinho</a>
+        <a href="<c:url value='/compraProduto?idProduto=${produto.id}'/>">Adicionar ao Carrinho</a>
         <a href="<c:url value='/listaProduto'/>">Voltar</a>        
     </body>
 </html>

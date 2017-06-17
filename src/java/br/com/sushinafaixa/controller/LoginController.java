@@ -5,7 +5,10 @@
  */
 package br.com.sushinafaixa.controller;
 
+import br.com.sushinafaixa.bean.Cliente;
 import br.com.sushinafaixa.bean.Usuario;
+import br.com.sushinafaixa.dao.CategoriaDAO;
+import br.com.sushinafaixa.dao.ClienteDAO;
 import br.com.sushinafaixa.dao.LoginDAO;
 import br.com.sushinafaixa.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,22 +26,26 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class LoginController {
 
-    private final LoginDAO dao;
+    @Autowired
+    private LoginDAO dao;
 
     @Autowired
-    public LoginController(LoginDAO dao) {
-        this.dao = dao;
-    }
+    private ClienteDAO daoCliente;
 
     @RequestMapping(value = "loginForm")
     public String efetuaLogin() {
         return "auth/formLogin";
     }
 
+    @RequestMapping(value = "registra")
+    public String registraForm() {
+        return "auth/formRegistro";
+    }
+
     @RequestMapping(value = "efetuaLogin")
     public String efetuaLogin(Usuario usuario, Model model,
             HttpServletRequest request) {
-        Usuario usuarioLogado = dao.buscaUsuarioByLogin(usuario.getLogin());
+        Usuario usuarioLogado = dao.buscaUsuarioByLogin(usuario.getLogin(), usuario.getSenha());
         if (usuarioLogado != null) {
             request.getSession(true)
                     .setAttribute("usuario", usuarioLogado);
@@ -53,19 +60,12 @@ public class LoginController {
         }
     }
 
-    @RequestMapping(value = "menuAdm")
-    public String menuAdmin() {
-        return "auth/menuAdm";
-    }
-
-    @RequestMapping(value = "menuCliente")
-    public String menuCliente() {
-        return "auth/menuCliente";
-    }
-
-    @RequestMapping(value = "menuGeral")
-    public String menuGeral() {
-        return "menuGeral";
+    @RequestMapping(value = "efetuaRegistro")
+    public String efetuaRegistro(Cliente clt,HttpServletRequest request) {
+        daoCliente.adiciona(clt);
+        request.getSession(true)
+                    .setAttribute("usuario", clt.getUsuario());
+        return "cliente/clente_adicionado";
     }
 
     @RequestMapping("logout")

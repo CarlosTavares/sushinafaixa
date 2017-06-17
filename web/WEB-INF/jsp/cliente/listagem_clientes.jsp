@@ -14,7 +14,7 @@
         <title>Listagem de Clientes</title>
     </head>
     <body>
-        <a href="<c:url value='menuAdm'/>">Voltar ao Menu</a> <br><br>
+        <input type="button" value="Voltar" onclick="history.back()" /><br><br>
         <table>
             <tr>
                 <th>Id</th>

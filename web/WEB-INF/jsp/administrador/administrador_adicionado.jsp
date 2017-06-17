@@ -16,6 +16,6 @@
     <body>
         Administrador adicionado com sucesso!
         <br />
-	<a href="<c:url value='formAdicionaAdmin'/>" title="Adicionar outro administrador">Adicionar outro Administrador</a>
+        <a href="<c:url value='formAdicionaAdmin'/>" title="Adicionar outro administrador">Adicionar outro Administrador</a>
     </body>
 </html>

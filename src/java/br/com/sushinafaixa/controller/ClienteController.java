@@ -24,12 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ClienteController {
 
-    private final ClienteDAO dao;
-
     @Autowired
-    public ClienteController(ClienteDAO dao) {
-        this.dao = dao;
-    }
+    private ClienteDAO dao;
 
     @RequestMapping("/formAdicionaCliente")
     public String form() {

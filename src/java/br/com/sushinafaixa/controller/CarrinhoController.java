@@ -38,7 +38,7 @@ public class CarrinhoController {
     @Autowired
     private ClienteDAO clienteDAO;
 
-    @RequestMapping({"/compra"})
+    @RequestMapping({"/compraProduto"})
     public String listProductHandler(HttpServletRequest request, Model model, //
             @RequestParam(value = "idProduto", defaultValue = "0") Long idProduto) {
         Produto produto = produtoDAO.buscarProdutoPorId(idProduto);

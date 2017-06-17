@@ -1,9 +1,8 @@
 <%-- 
-    Document   : listagem_produtos
-    Created on : 28/05/2017, 01:30:00
+    Document   : listage_produtos_categoria
+    Created on : 17/06/2017, 15:23:42
     Author     : Carlos.Tavares
 --%>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
@@ -16,6 +15,7 @@
     </head>
     <body>
         <input type="button" value="Voltar" onclick="history.back()" /><br><br>
+        <h3>${categoria.descricao}</h3>
         <table>
             <tr>
                 <th>Id</th>
@@ -33,16 +33,16 @@
                     <td><span >
                             <fmt:formatNumber value="${prod.preco}" type="currency"/>
                         </span></td>
-                    <td><figure><img src="${prod.imagemPath}" width="25px" alt="${prod.descricao}" /></figure></td>
+                    <td>
+                        <a href="detalheProduto?id=${prod.id}">
+                            <figure><img src="${prod.imagemPath}" width="25px" alt="${prod.descricao}" /></figure>
+                        </a>
+                    </td>
                     <td>${prod.categoria.descricao}</td>
                     <td>${prod.administrador.nome}</td>
                     <td>
                         <a href="detalhe?id=${prod.id}"> Detalhar</a> 
                         &nbsp;
-                        <a href="exibeProduto?id=${prod.id}"> Alterar </a> 
-                        &nbsp;
-                        <a href="removeProduto?id=${prod.id}" 
-                           onclick="return confirm('Deseja realmente excluir?')" > Remover </a> 
                     </td>
                 </tr>
             </c:forEach>

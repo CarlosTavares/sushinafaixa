@@ -25,18 +25,14 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class ProdutoController {
 
-    private final ProdutoDAO dao;
-    private final CategoriaDAO daoCategoria;
-    private final AdministradorDAO daoAdministrador;
+    @Autowired
+    private ProdutoDAO dao;
+    @Autowired
+    private CategoriaDAO daoCategoria;
+    @Autowired
+    private AdministradorDAO daoAdministrador;
     @Autowired
     private FileSaver fileSaver;
-
-    @Autowired
-    public ProdutoController(ProdutoDAO dao, CategoriaDAO daoCategoria, AdministradorDAO daoAdministrador) {
-        this.dao = dao;
-        this.daoCategoria = daoCategoria;
-        this.daoAdministrador = daoAdministrador;
-    }
 
     @RequestMapping("/formAdicionaProduto")
     public String form(@Valid Produto produto, Model model) {
@@ -62,6 +58,13 @@ public class ProdutoController {
         return "produto/listagem_produtos";
     }
 
+    @RequestMapping("listaProdutosByCategoria")
+    public String lista(Long idCategoria, Model model) {
+        model.addAttribute("categoria", daoCategoria.buscarCategoriaPorId(idCategoria));
+        model.addAttribute("listaProdutos", dao.lista(idCategoria));
+        return "produto/listagem_produtos_categoria";
+    }
+
     @RequestMapping("/removeProduto")
     public String remove(Long id) {
         dao.removerProduto(id);
@@ -74,7 +77,7 @@ public class ProdutoController {
         return "produto/exibe_produto";
     }
 
-    @RequestMapping("/detalhe")
+    @RequestMapping("/detalheProduto")
     public String detalha(Long id, Model model) {
         model.addAttribute("produto", dao.buscarProdutoPorId(id));
         return "produto/show_produto";

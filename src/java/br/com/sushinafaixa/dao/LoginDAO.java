@@ -50,12 +50,13 @@ public class LoginDAO {
         }
     }
 
-    public Usuario buscaUsuarioByLogin(String login) {
+    public Usuario buscaUsuarioByLogin(String login, String senha) {
         String sql = "select u.idusuario,u.login,u.senha,u.role "//
-                + " from usuario u where u.login = ? ";
+                + " from usuario u where u.login = ? and u.senha = ?";
         Usuario user = null;
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, login);
+            stmt.setString(2, senha);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 user = new Usuario();

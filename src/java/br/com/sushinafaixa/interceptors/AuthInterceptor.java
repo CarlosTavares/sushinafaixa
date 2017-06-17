@@ -24,6 +24,11 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
         if (uri.endsWith("loginForm")
                 || uri.endsWith("efetuaLogin")
                 || uri.endsWith("menuGeral")
+                || uri.endsWith("formAdicionaMensagem")
+                || uri.endsWith("formAdicionaCurriculo")
+                || uri.contains("listaProdutosByCategoria")
+                || uri.contains("detalheProduto")
+                || uri.contains("compraProduto")
                 || uri.endsWith("/")
                 || uri.contains("resources")) {
             return true;

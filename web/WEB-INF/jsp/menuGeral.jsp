@@ -1,7 +1,13 @@
+<%-- 
+    Document   : menuAdm
+    Created on : 12/06/2017, 15:36:18
+    Author     : Carlos.Tavares
+--%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
-
 <html>
     <head>
         <meta charset="utf-8" />
@@ -10,7 +16,6 @@
         <link href="resources/css/bootstrap.min.css" rel="stylesheet" />
         <title>Sushi Na Faixa</title>
     </head>
-
     <body>
     <nav class="navbar navbar-default" role="navigation">
         <div class="container">
@@ -19,24 +24,24 @@
                 <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> 
                     <span class="sr-only">Toggle navigation</span> 
                 </button> 
-                <a class="navbar-brand" href="#">Meu Site</a>
+                <a class="navbar-brand" href="#">SushiNaFaixa</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#">Home</a></li>
+                    <li class="active"><a href="formAdicionaMensagem" >Contato</a></li>
+                    <li class="active"><a href="formAdicionaCurriculo" >Curriculos</a></li>
                     <li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown">Categorias <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Jogos</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Tutoriais</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Vídeo aulas</a></li>
+                            <c:forEach items="${listaCategorias}" var="cat">
+                                <li class="divider"></li>
+                                <li><a href="listaProdutosByCategoria?idCategoria=${cat.id}">${cat.descricao}</a></li>
+                            </c:forEach>
                         </ul>
                     </li>
-                    <li><a href="#">Empresa</a></li>
-                    <li><a href="#">Contato</a></li>
-                    <li><a href="loginForm">Logar</a></li>
+                    <li class="active"><a href="loginForm">Logar</a></li>
+                    <li class="active"><a href="registra">Registrar-se</a></li>
                 </ul>
                 <form class="navbar-form navbar-right" role="search">
                     <div class="form-group"><input class="form-control" type="text" placeholder="Pesquisar" /></div>
@@ -51,7 +56,6 @@
             <div class="row">
                 <div id="conteudo" class="col-md-9"></div> <!-- Aqui e a area do conteudo -->
                 <div id="sidebar" class="col-md-3"></div> <!-- Aqui e a area do sidebar -->
-                <a href="${pageContext.request.contextPath}/welcome">Welcome Link</a>
             </div>
         </div>
     </div> <!-- Fim do conteudo -->
