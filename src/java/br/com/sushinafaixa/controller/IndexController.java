@@ -6,6 +6,7 @@
 package br.com.sushinafaixa.controller;
 
 import br.com.sushinafaixa.dao.CategoriaDAO;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,9 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class IndexController {
+
     @Autowired
     private CategoriaDAO categoriaDAO;
-    
+
     @RequestMapping("/")
     public String index() {
         return "redirect:/menuGeral";
@@ -36,8 +38,8 @@ public class IndexController {
     }
 
     @RequestMapping(value = "menuGeral")
-    public String menuGeral(Model model) {
-        System.out.println("br.com.sushinafaixa.controller.LoginController.menuGeral()");
+    public String menuGeral(Model model,HttpServletRequest request) {
+        request.getSession(true).setAttribute("site", true);
         model.addAttribute("listaCategorias", categoriaDAO.lista());
         return "menuGeral";
     }

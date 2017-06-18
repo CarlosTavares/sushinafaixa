@@ -1,37 +1,39 @@
 <%-- 
-    Document   : exibe-cliente
+    Document   : exibe_cliente
     Created on : 22/05/2017, 09:02:40
     Author     : User
 --%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Alterar Cliente</title>
-    </head>
-    <body>
-        <h3>Alterar Cliente - ${cliente.id}</h3>
-        <form action="<c:url value='/alteraCliente'/>" method="post">
-            <input type="hidden" name="id" value="${cliente.id}" />
-            Nome:
-            <form:errors path="cliente.nome" cssStyle="color:red"/>
-            <input name="nome" value="${cliente.nome}" />
-            <br><br>
-            Login: ${cliente.usuario.login}
-            <br><br>
-            CPF:
-            <input name="cpf" value="${cliente.cpf}" />
-            <br><br>
-            EndereÃ§o:
-            <input name="endereco" value="${cliente.endereco}" />
-            <br><br>
-            <input type="submit" value="Alterar"/>
-            <br><br>            
-        </form>
-        <a href="<c:url value='/listaCliente'/>">Voltar</a>
-    </body>
-</html>
+<%@include file="../comum/header.jsp" %>
+<%@include file="../auth/nav_admin.jsp" %>
+<section>
+    <!-- Aqui começa o conteudo -->
+    <div class="wrapper" role="main">
+        <div class="container">
+            <div class="row">
+                <div id="conteudo" class="col-md-9">
+                    <h3>Alterar Cliente - ${cliente.id}</h3>
+                    <form action="<c:url value='/alteraCliente'/>" method="post">
+                        <input type="hidden" name="id" value="${cliente.id}" />
+                        Nome:
+                        <form:errors path="cliente.nome" cssStyle="color:red"/>
+                        <input name="nome" value="${cliente.nome}" />
+                        <br><br>
+                        Login: ${cliente.usuario.login}
+                        <br><br>
+                        CPF:
+                        <input name="cpf" value="${cliente.cpf}" />
+                        <br><br>
+                        Endereço:
+                        <input name="endereco" value="${cliente.endereco}" />
+                        <br><br>
+                        <input type="submit" value="Alterar"/>
+                        <br><br>            
+                    </form>
+                    <a href="<c:url value='/listaCliente'/>">Voltar</a>
+                </div> <!-- Aqui e a area do conteudo -->
+                <div id="sidebar" class="col-md-3"></div> <!-- Aqui e a area do sidebar -->
+            </div>
+        </div>
+    </div> <!-- Fim do conteudo -->
+</section>
+<%@include file="../comum/footer.jsp" %>

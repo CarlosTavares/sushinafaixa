@@ -59,7 +59,6 @@ public class CategoriaDAO {
                 cat.setDescricao(rs.getString("descricao"));
                 categorias.add(cat);
             }
-            System.out.println("br.com.sushinafaixa.dao.CategoriaDAO.lista()");
             rs.close();
             stmt.close();
         } catch (SQLException e) {
@@ -77,7 +76,6 @@ public class CategoriaDAO {
             if (rs.next()) {
                 categoria.setId(rs.getLong("idcategoria"));
                 categoria.setDescricao(rs.getString("descricao"));
-
             }
             return categoria;
         } catch (SQLException e) {

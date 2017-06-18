@@ -44,4 +44,32 @@ public class Utils {
     public static Usuario getUsuarioLogado(HttpServletRequest request) {
         return (Usuario) request.getSession().getAttribute("usuario");
     }
+
+    public static String getUltimaURI(HttpServletRequest request) {
+        return (String) request.getSession().getAttribute("ultimaURI");
+    }
+
+    public static void setUltimaURI(HttpServletRequest request, String uri) {
+        if (uri.endsWith("loginForm")
+                || uri.endsWith("efetuaLogin")
+                || uri.endsWith("logout")
+                || uri.endsWith("efetuaRegistro")
+                || uri.endsWith("registra")
+                || uri.endsWith("/")
+                || uri.contains("resources")) {
+            System.out.println("UtilsURI: " + uri + " nao adicionou.");
+        } else {
+
+            request.getSession().setAttribute("ultimaURI", getAcao(uri));
+        }
+    }
+
+    private static String getAcao(String uri) {
+        String[] vetorUri = uri.split("/");
+        String resultado = "";
+        for (int i = 2; i < vetorUri.length; i++) {
+            resultado = "/" + vetorUri[i];
+        }
+        return resultado;
+    }
 }

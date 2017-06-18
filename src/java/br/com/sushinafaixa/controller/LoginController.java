@@ -7,10 +7,10 @@ package br.com.sushinafaixa.controller;
 
 import br.com.sushinafaixa.bean.Cliente;
 import br.com.sushinafaixa.bean.Usuario;
-import br.com.sushinafaixa.dao.CategoriaDAO;
 import br.com.sushinafaixa.dao.ClienteDAO;
 import br.com.sushinafaixa.dao.LoginDAO;
 import br.com.sushinafaixa.model.Role;
+import br.com.sushinafaixa.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,7 +33,7 @@ public class LoginController {
     private ClienteDAO daoCliente;
 
     @RequestMapping(value = "loginForm")
-    public String efetuaLogin() {
+    public String efetuaLogin(HttpServletRequest request) {
         return "auth/formLogin";
     }
 
@@ -43,16 +43,20 @@ public class LoginController {
     }
 
     @RequestMapping(value = "efetuaLogin")
-    public String efetuaLogin(Usuario usuario, Model model,
-            HttpServletRequest request) {
+    public String efetuaLogin(Usuario usuario, Model model,HttpServletRequest request) {
         Usuario usuarioLogado = dao.buscaUsuarioByLogin(usuario.getLogin(), usuario.getSenha());
+        System.out.println("Login.efetuaLogin: "+Utils.getUltimaURI(request));
         if (usuarioLogado != null) {
-            request.getSession(true)
-                    .setAttribute("usuario", usuarioLogado);
+            request.getSession(true).setAttribute("usuario", usuarioLogado);
+            request.getSession(true).setAttribute("site", false);
             if (usuarioLogado.getRole().equals(Role.ADMIN)) {
-                return "redirect:menuAdm";
+                request.getSession(true).setAttribute("admin", true);
+                request.getSession(true).setAttribute("cliente", false);
+                return "redirect:"+Utils.getUltimaURI(request);
             } else {
-                return "redirect:menuCliente";
+                request.getSession(true).setAttribute("admin", false);
+                request.getSession(true).setAttribute("cliente", true);
+                return "redirect:"+Utils.getUltimaURI(request);
             }
         } else {
             model.addAttribute("msgLoginInvalido", "Não é um usuario válido.");
@@ -65,12 +69,11 @@ public class LoginController {
         daoCliente.adiciona(clt);
         request.getSession(true)
                     .setAttribute("usuario", clt.getUsuario());
-        return "cliente/clente_adicionado";
+        return Utils.getUltimaURI(request);
     }
 
     @RequestMapping("logout")
     public String logout(HttpSession session) {
-        System.out.println("logout");
         session.invalidate();
         return "redirect:menuGeral";
     }

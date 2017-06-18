@@ -1,24 +1,33 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Adiciona Mensagem</title>
-    </head>
-    <body>
-        <h3>Adicionar Mensagem</h3>
-        <form action="<c:url value='/adicionaMensagem' />" method="post">
-            Assunto: <br />
-            <select name="motivo">
-                <option value="PERGUNTA">Pergunta</option>
-                <option value="CRITICA">CrÃ­tica</option>
-                <option value="SUGESTAO">SugestÃ£o</option>
-            </select> <br />
-            ConteÃºdo: <br />
-            <textarea name="conteudo" rows="5" cols="100"></textarea> <br />
+<%-- 
+    Document   : formAdicionaMensagem
+    Created on : 22/05/2017, 01:30:00
+    Author     : Carlos.Tavares
+--%>
+<%@include file="../comum/header.jsp" %>
+<%@include file="../auth/nav_admin.jsp" %>
+<section>
+    <!-- Aqui começa o conteudo -->
+    <div class="wrapper" role="main">
+        <div class="container">
+            <div class="row">
+                <div id="conteudo" class="col-md-9">
+                    <h3>Adicionar Mensagem</h3>
+                    <form action="<c:url value='/adicionaMensagem' />" method="post">
+                        Assunto: <br />
+                        <select name="motivo">
+                            <option value="PERGUNTA">Pergunta</option>
+                            <option value="CRITICA">Crítica</option>
+                            <option value="SUGESTAO">Sugestão</option>
+                        </select> <br />
+                        Conteúdo: <br />
+                        <textarea name="conteudo" rows="5" cols="100"></textarea> <br />
 
-            <input type="submit" value="Adicionar">
-        </form>
-    </body>
-</html>
+                        <input type="submit" value="Adicionar">
+                    </form>
+                </div> <!-- Aqui e a area do conteudo -->
+                <div id="sidebar" class="col-md-3"></div> <!-- Aqui e a area do sidebar -->
+            </div>
+        </div>
+    </div> <!-- Fim do conteudo -->
+</section>
+<%@include file="../comum/footer.jsp" %>

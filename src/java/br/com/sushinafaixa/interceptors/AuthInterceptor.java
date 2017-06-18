@@ -20,11 +20,14 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
             Object controller) throws Exception {
         String uri = request.getRequestURI();
-        System.out.println(uri);
+        Utils.setUltimaURI(request, uri);
+        System.out.println("AuthURI:"+uri);
         if (uri.endsWith("loginForm")
                 || uri.endsWith("efetuaLogin")
+                || uri.endsWith("registra")
                 || uri.endsWith("menuGeral")
                 || uri.endsWith("formAdicionaMensagem")
+                || uri.endsWith("adicionaMensagem")
                 || uri.endsWith("formAdicionaCurriculo")
                 || uri.contains("listaProdutosByCategoria")
                 || uri.contains("detalheProduto")
